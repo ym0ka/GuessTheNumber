@@ -25,10 +25,10 @@ namespace GuessTheNumber
             {
                 return value.ToString();
             }
-            {
-                Console.WriteLine("Key not found, returned null value.");
-                return null;
-            }
+            
+            Console.WriteLine("Key not found, returned null value.");
+            return null;
+            
         }
             
     }
