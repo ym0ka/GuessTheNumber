@@ -41,7 +41,7 @@ namespace GuessTheNumber
             Random random = new Random();
             int gameRandomNumber = random.Next(minGuessingNumber, maxGuessingNumber);
             int gameAttempts = maxAttempts;
-            Console.WriteLine($"DEBUG : The number is: {gameRandomNumber}");
+            //Console.WriteLine($"DEBUG : The number is: {gameRandomNumber}");
 
             while (gameAttempts > 0)
             {
