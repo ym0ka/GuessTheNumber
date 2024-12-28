@@ -1,5 +1,5 @@
 {
   "minGuessingNumber" : 1,
   "maxGuessingNumber" : 50,
-  "maxAttempts" : 3
+  "maxAttempts" : 5
 }
