@@ -13,7 +13,7 @@ namespace GuessTheNumber
             // string test = configManager.GetValueBasedOnKey("maxAttempts");
             // Console.WriteLine($"Max attempts to find the random number: {test}");
             
-            Console.WriteLine("Welcome to GuessTheNumber!");
+            Console.WriteLine("Launching GuessTheNumber!");
             Console.WriteLine("Would you like to use hints for you game ? (Y/N)");
             switch (Console.ReadLine())
             {
