@@ -1,10 +1,12 @@
-﻿using System.Security.Cryptography;
+﻿using System.Collections.Generic;
 
 namespace GuessTheNumber
 {
     class Program
     {
         static bool hintsEnabled;
+        static List<string> yesKeywords = new List<string>{"y","Y","yes","YES"};
+        static List<string> noKeywords = new List<string>{"n","N","no","NO"};
         
         static void Main(string[] args)
         {
@@ -15,23 +17,34 @@ namespace GuessTheNumber
             
             Console.WriteLine("Launching GuessTheNumber!");
             Console.WriteLine("Would you like to use hints for you game ? (Y/N)");
-            switch (Console.ReadLine())
+            
+            string playerHintChoice = null;
+            while (string.IsNullOrWhiteSpace(playerHintChoice) || (!yesKeywords.Contains(playerHintChoice) && !noKeywords.Contains(playerHintChoice)))
             {
-                case "Y":
-                case "y":
-                case "YES":
-                case "yes":
-                    Console.WriteLine("Enabled hints.");
-                    hintsEnabled = true;
-                    break;
-                case "N":
-                case "n":
-                case "NO":
-                case "no":
-                    Console.WriteLine("Disabled hints.");
-                    hintsEnabled = false;
-                    break;
+                playerHintChoice = Console.ReadLine();
+                if (string.IsNullOrWhiteSpace(playerHintChoice))
+                {
+                    Console.WriteLine("Choice cannot be empty! Try again.");
+                }
+
+                if (!yesKeywords.Contains(playerHintChoice) && !noKeywords.Contains(playerHintChoice))
+                {
+                    Console.WriteLine("You need to enter yes or no!");
+                }
+                
             }
+            if (yesKeywords.Contains(playerHintChoice))
+            {
+                Console.WriteLine("Enabled hints.");
+                hintsEnabled = true;
+            }
+            
+            if (noKeywords.Contains(playerHintChoice))
+            {
+                Console.WriteLine("Disabled hints.");
+                hintsEnabled = false;
+            }
+            
             
             Console.WriteLine("Launching game with following settings :");
             string maxAttempts = configManager.GetValueBasedOnKey("maxAttempts");
