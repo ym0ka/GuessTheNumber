@@ -5,13 +5,6 @@
 
 - Chose if you want to have hints about the number chosen by the game or not
 - Answer the number and see if you won
-- You have a determined amount of attempts to find it
-
-### TODO :
-- Add securities about the guessing value
-  - Can't be negative
-  - Can't be decimal
-  - Can't be smth else than a number
-  - Can't be over or below min and max values
+- You have a determined amount of attempts to find it, edit the config.json to change that
 
 Config values : minValue, maxValue, maxAttempts
