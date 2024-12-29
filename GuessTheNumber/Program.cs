@@ -19,6 +19,7 @@ namespace GuessTheNumber
             Console.WriteLine("Would you like to use hints for you game ? (Y/N)");
             
             string playerHintChoice = null;
+            //This while block is necessary to avoid player entering random values about activating hints or not.
             while (string.IsNullOrWhiteSpace(playerHintChoice) || (!yesKeywords.Contains(playerHintChoice) && !noKeywords.Contains(playerHintChoice)))
             {
                 playerHintChoice = Console.ReadLine();
@@ -44,7 +45,6 @@ namespace GuessTheNumber
                 Console.WriteLine("Disabled hints.");
                 hintsEnabled = false;
             }
-            
             
             Console.WriteLine("Launching game with following settings :");
             string maxAttempts = configManager.GetValueBasedOnKey("maxAttempts");
@@ -82,21 +82,26 @@ namespace GuessTheNumber
                     Console.WriteLine("Congratulations, you guessed the random number!");
                     return;
                 }
-                gameAttempts--;
-                if (gameAttempts > 0)
+                if (int.Parse(playerGuess) < maxGuessingNumber && int.Parse(playerGuess) > minGuessingNumber)
                 {
-                    Console.WriteLine($"Try again, one attempt consumed. ! Remaining {gameAttempts} attempts.");
-                    if (hintsEnabled)
+                    if (gameAttempts-- > 0)
                     {
-                        if (playerGuess != null && int.Parse(playerGuess) > gameRandomNumber)
+                        Console.WriteLine($"Try again, one attempt consumed. ! Remaining {gameAttempts} attempts.");
+                        if (hintsEnabled)
                         {
-                            Console.WriteLine("[Hint] The number is lower than your guess!");
-                        }
-                        else if (playerGuess != null && int.Parse(playerGuess) < gameRandomNumber)
-                        {
-                            Console.WriteLine("[Hint] The number is greater than your guess!");
+                            if (playerGuess != null && int.Parse(playerGuess) > gameRandomNumber)
+                            {
+                                Console.WriteLine("[Hint] The number is lower than your guess!");
+                            }
+                            else if (playerGuess != null && int.Parse(playerGuess) < gameRandomNumber)
+                            {
+                                Console.WriteLine("[Hint] The number is greater than your guess!");
+                            }
                         }
                     }
+                } else if (int.Parse(playerGuess) > maxGuessingNumber || int.Parse(playerGuess) < minGuessingNumber)
+                {
+                    Console.WriteLine($"You are out of bonds. Value must be between {minGuessingNumber} and {maxGuessingNumber}.");
                 }
                 if (gameAttempts == 0)
                 {
